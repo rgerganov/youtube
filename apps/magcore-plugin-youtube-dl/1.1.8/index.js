@@ -10233,7 +10233,11 @@ exports.setDownloadURL = function (format, sig, debug) {
   // See https://github.com/fent/node-ytdl-core/issues/127
   query.ratebypass = 'yes';
   if (sig) {
-    query.signature = sig;
+    if (format.sp) {
+      query[format.sp] = sig;
+    } else {
+      query.signature = sig;
+    }
   }
 
   format.url = url.format(parsedUrl);
